@@ -1,0 +1,30 @@
+[
+  {
+    "id_user": "PG01",
+    "nama": "Farhan Ibra",
+    "umur": "19",
+    "no_telp": "081234567890",
+    "member": "ada"
+  },
+  {
+    "id_user": "PG02",
+    "nama": "Dina Sari",
+    "umur": "22",
+    "no_telp": "081987654321",
+    "member": "tidak ada"
+  },
+  {
+    "id_user": "PG03",
+    "nama": "Rizky Pratama",
+    "umur": "25",
+    "no_telp": "081555555555",
+    "member": "tidak ada"
+  },
+  {
+    "id_user": "PG04",
+    "nama": "Siti Nurhaliza",
+    "umur": "20",
+    "no_telp": "081666666666",
+    "member": "ada"
+  }
+]

@@ -27,54 +27,74 @@ def display_items(items, item_type):
         print(f"\nBelum ada data {item_type}.")
         return False
     
-    print(f"No. {'Kode Buku':<10} | {'Kategori':<20} | {'Judul Buku':<20} | {'Nama Penulis':<20} | {'Stok':<5} | {'Tanggal':<12}") 
+    if item_type == "buku":
+        print(f"No. {'Kode Buku':<10} | {'Kategori':<20} | {'Judul Buku':<20} | {'Nama Penulis':<20} | {'Stok':<5} | {'Tanggal':<12}") 
+    elif item_type == "user":
+        print(f"No. {'ID User':<10} | {'Nama':<20} | {'Umur':<5} | {'No. Telp':<15} | {'Member':<10}") 
     for idx, item in enumerate(items, 1):
         if item_type == "buku":
             print(f"{idx:<2}. {item['id_buku']:<10} | {item['kategori']:<20} | {item['judul_buku']:<20} | {item['nama_penulis']:<20} | {item['stok']:<5} | {item['tgl']:<12}")
+        elif item_type == "user":
+            print(f"{idx:<2}. {item['id_user']:<10} | {item['nama']:<20} | {item['umur']:<5} | {item['no_telp']:<15} | {item['member']:<10}")
     return True
     
-def crud_view(file, item_type):
+def tampil_data(file, item_type):
     """Generic view function with sorting option"""
     clear_screen()
     print("=" * 50)
-    print("Daftar Buku - Gie's Library")
+    print(f"Dashboard Admin - Tampil Data {item_type}")
     print("=" * 50)
     
     data = baca_data(file)
     
     if data:
-        print("\nUrutan tampilan:")
-        print("1. Alphabetical (A-Z)")
-        print("2. Data terbaru")
-        sort_choice = input("\nPilih urutan (1): ").strip()
-        
-        if sort_choice == "1":
-            if item_type == "buku":
-                data = sorted(data, key=lambda x: x['id_buku'])
-        elif sort_choice == "2":
-            data = sorted(data, key=lambda x: datetime.strptime(x['tgl'], "%d-%m-%Y"), reverse=True)
-        else:
-            print("Input tidak sesuai")
+        if item_type == "buku":
+            print("\nUrutan tampilan:")
+            print("1. Alphabetical (A-Z)")
+            print("2. Data terbaru")
+            sort_choice = input("\nPilih urutan (1): ").strip()
+            
+            if sort_choice == "1":
+                if item_type == "buku":
+                    data = sorted(data, key=lambda x: x['id_buku'])
+            elif sort_choice == "2":
+                data = sorted(data, key=lambda x: datetime.strptime(x['tgl'], "%d-%m-%Y"), reverse=True)
+            else:
+                print("Input tidak sesuai")
+        elif item_type == "user":
+            print("\nUrutan tampilan:")
+            print("1. Alphabetical (A-Z)")
+            sort_choice = input("\nPilih urutan (1): ").strip()
+            
+            if sort_choice == "1":
+                data = sorted(data, key=lambda x: x['nama'])
+            else:
+                print("Input tidak sesuai")
     
     display_items(data, item_type)
     pause()
 
-from datetime import datetime
-
-def crud_add(file, item_type):
+def tambah_data(file, item_type):
     """Generic add function"""
     clear_screen()
     print("=" * 50)
-    print(f"Tambah Data {item_type.capitalize()} - Gie's Library")
+    print(f"Dashboard Admin - Tambah Data {item_type}")
     print("=" * 50)
     
+    data = baca_data(file)
+    
     if item_type == "buku":
-        id_buku = input("\nKode Buku: ").strip()
+        id_buku = input("\nKode Buku: ").strip().upper()
         kategori = input("Kategori: ").strip()
         judul_buku = input("Judul Buku: ").strip()
         nama_penulis = input("Nama Penulis: ").strip()
         stok = input("Stok: ").strip()
         tgl = datetime.now().strftime("%d-%m-%Y")
+        
+        if any(item['id_buku'] == id_buku for item in data):
+            print("\nKode Buku sudah ada! Gunakan kode lain.")
+            pause()
+            return
         
         new_item = {
             "id_buku": id_buku,
@@ -85,26 +105,41 @@ def crud_add(file, item_type):
             "tgl": tgl
         }
         
-        data = baca_data(file)
+    elif item_type == "user":
+        id_user = input("\nID User: ").strip().upper()
+        nama = input("Nama: ").strip()
+        umur = input("Umur: ").strip()
+        no_telp = input("No. Telp: ").strip()
+        member = input("Member (ada/tidak ada): ").strip()
         
-        # 🔍 CEK DUPLIKAT ID
-        for item in data:
-            if item['id_buku'] == id_buku:
-                print("\nKode Buku sudah ada! Gunakan Kode yang berbeda.")
-                pause()
-                return
+        if any(item['id_user'] == id_user for item in data):
+            print("\nID User sudah ada! Gunakan ID lain.")
+            pause()
+            return
         
-        # kalau tidak ada duplikat, baru ditambah
-        data.append(new_item)
-        simpan_data(file, data)
-        print("\n Data berhasil ditambahkan!")
+        new_item = {
+            "id_user": id_user,
+            "nama": nama,
+            "umur": umur,
+            "no_telp": no_telp,
+            "member": member
+        }
+    
+    else:
+        print("\nTipe data tidak dikenali!")
         pause()
+        return
+    
+    data.append(new_item)
+    simpan_data(file, data)
+    print("\n✓ Data berhasil ditambahkan!")
+    pause()
 
-def crud_edit(file, item_type):
+def edit_data(file, item_type):
     """Generic edit function"""
     clear_screen()
     print("=" * 50)
-    print(f"Edit Data {item_type.capitalize()} - Gie's Library")
+    print(f"Dashboard Admin - Edit Data {item_type}")
     print("=" * 50)
     
     data = baca_data(file)
@@ -139,16 +174,30 @@ def crud_edit(file, item_type):
             "stok": stok,
             "tgl": datetime.now().strftime("%d-%m-%Y") 
         })
+    elif item_type == "user":
+        print("\nKosongkan input untuk mempertahankan nilai lama.")
+        nama = input(f"Nama ({item['nama']}): ").strip() or item['nama']
+        umur = input(f"Umur ({item['umur']}): ").strip() or item['umur']
+        no_telp = input(f"No. Telp ({item['no_telp']}): ").strip() or item['no_telp']
+        member = input(f"Member ({item['member']}): ").strip() or item['member']
         
-        simpan_data(file, data)
-        print("\nData berhasil diperbarui!")
-        pause()
+        # Update data
+        item.update({
+            "nama": nama,
+            "umur": umur,
+            "no_telp": no_telp,
+            "member": member
+        })
+        
+    simpan_data(file, data)
+    print("\nData berhasil diperbarui!")
+    pause()
 
-def crud_delete(file, item_type):   
+def hapus_data(file, item_type):   
     """Generic delete function"""
     clear_screen()
     print("=" * 50)
-    print(f"Hapus Data {item_type.capitalize()} - Gie's Library")
+    print(f"Dashboard Admin - Hapus Data {item_type}")
     print("=" * 50)
     
     data = baca_data(file)
@@ -181,7 +230,7 @@ def crud_menu(file, item_type):
     while True:
         clear_screen()
         print("=" * 50)
-        print(f"Admin - Kelola {item_type}")
+        print(f"Dashboard Admin - Data {item_type}")
         print("=" * 50)
         print("1. Tampilkan Daftar")
         print("2. Tambah Data")
@@ -192,13 +241,13 @@ def crud_menu(file, item_type):
         choice = input("\nPilih (0-4): ").strip()
         
         if choice == "1":
-            crud_view(file, item_type)
+            tampil_data(file, item_type)
         elif choice == "2":
-            crud_add(file, item_type)
+            tambah_data(file, item_type)
         elif choice == "3":
-            crud_edit(file, item_type)
+            edit_data(file, item_type)
         elif choice == "4":
-            crud_delete(file, item_type)
+            hapus_data(file, item_type)
         elif choice == "0":
             break
 
@@ -207,7 +256,7 @@ def admin_menu():
     while True:
         clear_screen()
         print("=" * 50)
-        print("Dashboard - Gie's Library")
+        print("Dashboard Admin - Gie's Library")
         print("=" * 50)
         print("1. Kelola Data Buku")
         print("2. Kelola Data Pengunjung")
