@@ -1,0 +1,34 @@
+[
+  {
+    "id_buku": "BKU01",
+    "kategori": "Novel",
+    "judul_buku": "ABC",
+    "nama_penulis": "Penulis ABC",
+    "stok": "3",
+    "tgl": "28-03-2026"
+  },
+  {
+    "id_buku": "AKU02",
+    "kategori": "Fiksi",
+    "judul_buku": "DEF",
+    "nama_penulis": "Penulis DEF",
+    "stok": "5",
+    "tgl": "15-06-2026"
+  },
+  {
+    "id_buku": "BKU03",
+    "kategori": "Non-Fiksi",
+    "judul_buku": "GHI",
+    "nama_penulis": "Penulis GHI",
+    "stok": "2",
+    "tgl": "10-09-2026"
+  },
+  {
+    "id_buku": "BKU04",
+    "kategori": "Biografi",
+    "judul_buku": "JKL",
+    "nama_penulis": "Penulis JKL",
+    "stok": "4",
+    "tgl": "20-12-2026"
+  }
+]
