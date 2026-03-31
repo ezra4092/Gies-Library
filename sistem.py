@@ -1,5 +1,6 @@
 import json
 import os
+from config import *
 from datetime import datetime
 
 
@@ -34,3 +35,21 @@ def pause():
     """Pause and wait for user input"""
     input("\nTekan Enter untuk melanjutkan...")
 
+def cek_member(id_user):
+    data = baca_data(USER_FILE)
+    
+    for member in data:
+        if member["id_user"] == id_user:
+            if member["member"].lower() == "ada":
+                return True
+            else:
+                return False
+    
+    return False
+
+
+def cari_buku(input_buku, data_buku):
+    for buku in data_buku:
+        if buku["id_buku"] == input_buku or buku["judul_buku"].lower() == input_buku.lower():
+            return buku  # ⬅️ ini referensi ke data asli
+    return None

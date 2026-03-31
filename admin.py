@@ -21,21 +21,34 @@ def admin_login():
         pause()
         return False
 
+# def display_items(items, item_type):
+#     """Generic display function"""
+#     if not items:
+#         print(f"\nBelum ada data {item_type}.")
+#         return False
+    
+#     for idx, item in enumerate(items, 1):
+#         if item_type == "buku":
+#             print(f"{idx:<2}. {item['id_buku']:<10} | {item['kategori']:<20} | {item['judul_buku']:<20} | {item['nama_penulis']:<20} | {item['stok']:<5} | {item['tgl']:<12}")
+#         elif item_type == "user":
+#             print(f"{idx:<2}. {item['id_user']:<10} | {item['nama']:<20} | {item['umur']:<5} | {item['no_telp']:<15} | {item['member']:<10}")
+#     return True
+    
 def display_items(items, item_type):
-    """Generic display function"""
     if not items:
         print(f"\nBelum ada data {item_type}.")
         return False
     
-    if item_type == "buku":
-        print(f"No. {'Kode Buku':<10} | {'Kategori':<20} | {'Judul Buku':<20} | {'Nama Penulis':<20} | {'Stok':<5} | {'Tanggal':<12}") 
-    elif item_type == "user":
-        print(f"No. {'ID User':<10} | {'Nama':<20} | {'Umur':<5} | {'No. Telp':<15} | {'Member':<10}") 
     for idx, item in enumerate(items, 1):
+        if isinstance(item, str):
+            item = eval(item)
+
         if item_type == "buku":
             print(f"{idx:<2}. {item['id_buku']:<10} | {item['kategori']:<20} | {item['judul_buku']:<20} | {item['nama_penulis']:<20} | {item['stok']:<5} | {item['tgl']:<12}")
+        
         elif item_type == "user":
             print(f"{idx:<2}. {item['id_user']:<10} | {item['nama']:<20} | {item['umur']:<5} | {item['no_telp']:<15} | {item['member']:<10}")
+    
     return True
     
 def tampil_data(file, item_type):
@@ -70,7 +83,11 @@ def tampil_data(file, item_type):
                 data = sorted(data, key=lambda x: x['nama'])
             else:
                 print("Input tidak sesuai")
-    
+                
+    if item_type == "buku":
+        print(f"No. {'Kode Buku':<10} | {'Kategori':<20} | {'Judul Buku':<20} | {'Nama Penulis':<20} | {'Stok':<5} | {'Tanggal':<12}") 
+    elif item_type == "user":
+        print(f"No. {'ID User':<10} | {'Nama':<20} | {'Umur':<5} | {'No. Telp':<15} | {'Member':<10}") 
     display_items(data, item_type)
     pause()
 
@@ -251,8 +268,108 @@ def crud_menu(file, item_type):
         elif choice == "0":
             break
 
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.next = None
+
+class LinkedList:
+    def __init__(self):
+        self.head = None
+
+    def tambah(self, data):
+        new_node = Node(data)
+        if not self.head:
+            self.head = new_node
+        else:
+            current = self.head
+            while current.next:
+                current = current.next
+            current.next = new_node
+
+    def tampilkan(self):
+        current = self.head
+        if not current:
+            print("Belum ada data peminjaman.")
+            return
+        
+        no = 1
+        while current:
+            print(f"{no}. {current.data}")
+            current = current.next
+            no += 1
+
+def proses_peminjaman(ll_peminjaman):
+    data_buku = baca_data(BUKU_FILE)
+    display_items(data_buku, "buku")
+
+    id_user = input("\nMasukkan ID User: ")
+
+    # cek member
+    if not cek_member(id_user):
+        print("❌ User bukan member! Harus daftar dulu.")
+        input("Tekan ENTER untuk lanjut...")
+        return
+
+    print("✅ Member ditemukan.")
+
+    input_buku = input("Masukkan ID / Judul Buku: ")
+    buku = cari_buku(input_buku, data_buku)
+
+    if not buku:
+        print("❌ Buku tidak ditemukan.")
+        return
+
+    if int(buku["stok"]) <= 0:
+        print("❌ Stok buku habis.")
+        return
+
+    konfirmasi = input("Izinkan peminjaman? (y/n): ")
+    if konfirmasi.lower() == 'y':
+
+        data_pinjam = {
+            "id_user": id_user,
+            "id_buku": buku["id_buku"],
+            "judul_buku": buku["judul_buku"],
+            "tgl_peminjaman": datetime.now().strftime("%d-%m-%Y")
+        }
+
+        ll_peminjaman.tambah(data_pinjam)
+        buku["stok"] = int(buku["stok"]) - 1
+
+        simpan_data(BUKU_FILE, data_buku)
+
+        print("✅ Buku berhasil dipinjam!")
+        pause()
+    else:
+        print("❌ Peminjaman dibatalkan.")
+        pause()
+
+def peminjaman_menu(ll_peminjaman):
+    """Menu peminjaman buku"""
+    while True:
+        clear_screen()
+        print("=" * 50)
+        print("Dashboard Admin - Peminjaman Buku")
+        print("=" * 50)
+        print("1. Proses Peminjaman")
+        print("2. Tampilkan Data Peminjaman")
+        print("0. Kembali")
+        
+        choice = input("\nPilih (0-2): ").strip()
+        
+        if choice == "1":
+            proses_peminjaman(ll_peminjaman)
+        elif choice == "2":
+            ll_peminjaman.tampilkan()
+            pause()
+        elif choice == "0":
+            break
+
+
 def admin_menu():
     """Admin main menu"""
+    ll_peminjaman = LinkedList()
     while True:
         clear_screen()
         print("=" * 50)
@@ -260,6 +377,8 @@ def admin_menu():
         print("=" * 50)
         print("1. Kelola Data Buku")
         print("2. Kelola Data Pengunjung")
+        print("3. Kelola Data Peminjaman")
+        # print("4. Cetak Laporan")
         print("0. Logout")
         
         choice = input("\nPilih (0-2): ").strip()
@@ -268,6 +387,8 @@ def admin_menu():
             crud_menu(BUKU_FILE, "buku")
         elif choice == "2":
             crud_menu(USER_FILE, "user")
+        elif choice == "3":
+            peminjaman_menu(ll_peminjaman)
         elif choice == "0":
             print("\nLogging out...")
             pause()
