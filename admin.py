@@ -123,23 +123,35 @@ def tambah_data(file, item_type):
         }
         
     elif item_type == "user":
-        id_user = input("\nID User: ").strip().upper()
+        while True:
+            id_user = input("\nID User: ").strip().upper()
+            if any(item['id_user'] == id_user for item in data):
+                print("\nID User sudah ada! Gunakan ID lain.")
+            else:
+                break
         nama = input("Nama: ").strip()
         umur = input("Umur: ").strip()
         no_telp = input("No. Telp: ").strip()
         member = input("Member (ada/tidak ada): ").strip()
+        while True:
+            username = input("Username: ").strip()
+            if username == "":
+                print("Username tidak boleh kosong!")
+            elif any(user["username"] == username for user in data):
+                print("Username sudah digunakan!")
+            else:
+                break
+        password = input("Password: ").strip()
         
-        if any(item['id_user'] == id_user for item in data):
-            print("\nID User sudah ada! Gunakan ID lain.")
-            pause()
-            return
         
         new_item = {
             "id_user": id_user,
             "nama": nama,
             "umur": umur,
             "no_telp": no_telp,
-            "member": member
+            "member": member,
+            "username": username,
+            "password": password
         }
     
     else:

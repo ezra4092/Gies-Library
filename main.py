@@ -11,6 +11,7 @@ Modules:
 
 from sistem import clear_screen, pause
 from admin import admin_login, admin_menu
+from user import login_pengunjung, user_menu
 
 def main_menu():
     """Main menu aplikasi"""
@@ -26,8 +27,8 @@ def main_menu():
         choice = input("\nPilih menu (0-2): ").strip()
         
         if choice == "1":
-            print("1")
-            pause()
+            if login_pengunjung():
+                user_menu()
         elif choice == "2":
             if admin_login():
                 admin_menu()
