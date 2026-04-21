@@ -1,8 +1,0 @@
-BKU01, Novel, ABC, Penulis1, 3
-BKU02, Novel, DEF, Penulis2, 2
-BKU03, Novel, ABC, Penulis3, 1
-BKU04, Novel, DEF, Penulis4, 3
-BKU05, Novel, DEF, Penulis5, 3
-BKU06, Novel, DEF, Penulis6, 2
-BKU07, Novel, DEF, Penulis7, 1
-BKU08, Novel, DEF, Penulis8, 3

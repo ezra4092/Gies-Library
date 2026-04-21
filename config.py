@@ -8,7 +8,7 @@ import os
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 # File Paths - Using absolute paths
-BUKU_FILE = os.path.join(BASE_DIR, "data", "buku.perpus.json")
+BUKU_FILE = os.path.join(BASE_DIR, "data", "buku_perpus.json")
 USER_FILE = os.path.join(BASE_DIR, "data", "user.json")
 
 # Admin Credentials (Hardcoded)

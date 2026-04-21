@@ -1,0 +1,162 @@
+[
+  {
+    "id_buku": "BKU01",
+    "kategori": "Novel",
+    "judul_buku": "Bumi Manusia",
+    "nama_penulis": "Pramoedya Ananta Toer",
+    "stok": "2",
+    "tanggal": "20-02-2018"
+  },
+  {
+    "id_buku": "BKU02",
+    "kategori": "Novel",
+    "judul_buku": "Rasina",
+    "nama_penulis": "Iksaka Banu",
+    "stok": 0,
+    "tanggal": "13-07-2022"
+  },
+  {
+    "id_buku": "BKU03",
+    "kategori": "Novel",
+    "judul_buku": "Semua Untuk Hindia",
+    "nama_penulis": "Iksaka Banu",
+    "stok": "4",
+    "tanggal": "13-09-2022"
+  },
+  {
+    "id_buku": "BKU04",
+    "kategori": "Novel",
+    "judul_buku": "Orang-orang Proyek",
+    "nama_penulis": "Ahmad Tohari",
+    "stok": "3",
+    "tanggal": "24-03-2019"
+  },
+  {
+    "id_buku": "BKU05",
+    "kategori": "Sejarah",
+    "judul_buku": "Peralihan Zaman",
+    "nama_penulis": "Soe Hok Gie",
+    "stok": "2",
+    "tanggal": "17-08-2020"
+  },
+  {
+    "id_buku": "BKU06",
+    "kategori": "Novel",
+    "judul_buku": "Bukan Pasar Malam",
+    "nama_penulis": "Pramoedya Ananta Toer",
+    "stok": "2",
+    "tanggal": "12-03-2018"
+  },
+  {
+    "id_buku": "BKU07",
+    "kategori": "Novel",
+    "judul_buku": "Harimau Harimau",
+    "nama_penulis": "Mochtar Lubis",
+    "stok": "3",
+    "tanggal": "27-09-2016"
+  },
+  {
+    "id_buku": "BKU08",
+    "kategori": "Sejarah",
+    "judul_buku": "Kekerasan Budaya Pasca 1965",
+    "nama_penulis": "Wijaya Herlambang",
+    "stok": "1",
+    "tanggal": "13-09-2024"
+  },
+  {
+    "id_buku": "BKU09",
+    "kategori": "Novel",
+    "judul_buku": "Lebih Putrih Dariku",
+    "nama_penulis": "Dido Michielsen",
+    "stok": "2",
+    "tanggal": "17-10-2020"
+  },
+  {
+    "id_buku": "BKU10",
+    "kategori": "Novel",
+    "judul_buku": "Anak Semua Bangsa",
+    "nama_penulis": "Pramoedya Ananta Toer",
+    "stok": "2",
+    "tanggal": "27-12-2016"
+  },
+  {
+    "id_buku": "BKU11",
+    "kategori": "Pengembangan Diri",
+    "judul_buku": "Social Intelligence",
+    "nama_penulis": "Daniel Goleman",
+    "stok": "3",
+    "tanggal": "05-11-2023"
+  },
+  {
+    "id_buku": "BKU012",
+    "kategori": "Sejarah",
+    "judul_buku": "Cerita dari Digul",
+    "nama_penulis": "Pramoedya Ananta Toer",
+    "stok": "2",
+    "tanggal": "27-12-2018"
+  },
+  {
+    "id_buku": "BKU013",
+    "kategori": "Novel",
+    "judul_buku": "Pangeran dari Timur",
+    "nama_penulis": "Iksaka Banu dan Kurnia E.",
+    "stok": "1",
+    "tanggal": "13-07-2022"
+  },
+  {
+    "id_buku": "BKU14",
+    "kategori": "Pengembangan Diri",
+    "judul_buku": "25 Ways to Win with People",
+    "nama_penulis": "John C Maxwell",
+    "stok": "1",
+    "tanggal": "23-10-2017"
+  },
+  {
+    "id_buku": "BKU15",
+    "kategori": "Sejarah",
+    "judul_buku": "Di Bawah Lentera Merah",
+    "nama_penulis": "Soe Hok Gie",
+    "stok": "1",
+    "tanggal": "17-01-2019"
+  },
+  {
+    "id_buku": "BKU16",
+    "kategori": "Sejarah",
+    "judul_buku": "Memoar Pulau Buru",
+    "nama_penulis": "Pramoedya Ananta Toer",
+    "stok": "2",
+    "tanggal": "13-05-2017"
+  },
+  {
+    "id_buku": "BKU17",
+    "kategori": "Pengembangan Diri",
+    "judul_buku": "Real Artists Don't Starve",
+    "nama_penulis": "Jeff Goins",
+    "stok": "1",
+    "tanggal": "24-03-2023"
+  },
+  {
+    "id_buku": "BKU18",
+    "kategori": "Novel",
+    "judul_buku": "1984",
+    "nama_penulis": "George Orwell",
+    "stok": "2",
+    "tanggal": "17-02-2016"
+  },
+  {
+    "id_buku": "BKU19",
+    "kategori": "Politik",
+    "judul_buku": "Why Nations Fail",
+    "nama_penulis": "Daron A. dan James A.",
+    "stok": 0,
+    "tanggal": "13-09-2000"
+  },
+  {
+    "id_buku": "BKU20",
+    "kategori": "Politik",
+    "judul_buku": "The Jakarta Method",
+    "nama_penulis": "Vincent Bevins",
+    "stok": 0,
+    "tanggal": "12-05-2022"
+  }
+]

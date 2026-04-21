@@ -1,6 +1,6 @@
 from buku import lihat_buku
 from sistem import baca_data, clear_screen, pause
-from config import BUKU_FILE, USER_FILE
+from config import USER_FILE
 from datetime import datetime
 
 def login_pengunjung():
