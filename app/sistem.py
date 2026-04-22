@@ -57,20 +57,15 @@ def cek_data(items, item_type):
 
     return True
 
-
-def get_timestamp():
-    """Get current timestamp"""
-    return datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-
 def pause():
     """Pause and wait for user input"""
     input("\nTekan Enter untuk melanjutkan...")
 
-def cek_member(id_user):
+def cek_member(username):
     data = baca_data(USER_FILE)
     
     for member in data:
-        if member["id_user"] == id_user:
+        if member["username"] == username:
             if member["member"].lower() == "ada":
                 return True
             else:

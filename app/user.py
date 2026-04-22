@@ -1,5 +1,5 @@
-from buku import lihat_buku
-from sistem import baca_data, clear_screen, pause
+from app.buku import lihat_buku
+from app.sistem import baca_data, clear_screen, pause
 from config import USER_FILE
 from datetime import datetime
 
@@ -17,12 +17,12 @@ def login_pengunjung():
             break
     
     if user_ditemukan is None:
-        print("\n✗ Akun tidak ditemukan! Silakan registrasi terlebih dahulu.")
+        print("\nAkun tidak ditemukan! Silakan registrasi terlebih dahulu.")
         pause()
         return False
     
     if user_ditemukan["password"] == password:
-        print(f"\n✓ Login berhasil! Selamat datang, {user_ditemukan['nama']}")
+        print(f"\nLogin berhasil! Selamat datang, {user_ditemukan['nama']}")
         pause()
         return True
     
@@ -50,6 +50,6 @@ def user_menu():
             print("Belum ada, bntr y")
             pause()
         elif choice == "0":
-            print("\n✓ Logout berhasil. Sampai jumpa!")
+            print("\nLogout berhasil. Sampai jumpa!")
             pause()
             break

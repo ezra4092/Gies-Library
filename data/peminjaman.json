@@ -1,0 +1,14 @@
+[
+  {
+    "username": "farhan",
+    "id_buku": "BKU15",
+    "judul_buku": "Di Bawah Lentera Merah",
+    "tanggal_peminjaman": "22-04-2026"
+  },
+  {
+    "username": "siti",
+    "id_buku": "BKU11",
+    "judul_buku": "Social Intelligence",
+    "tanggal_peminjaman": "22-04-2026"
+  }
+]

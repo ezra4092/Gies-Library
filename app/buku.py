@@ -1,4 +1,4 @@
-from sistem import baca_data, pause
+from app.sistem import baca_data, pause
 from config import BUKU_FILE
 
 def lihat_buku():

@@ -1,4 +1,4 @@
-from sistem import *
+from app.sistem import *
 from config import *
 from datetime import datetime
 class Node:
@@ -28,7 +28,7 @@ class LinkedList:
         
         print(f"{'📖 DATA PEMINJAMAN':^80}")
         print("=" * 80)
-        print(f"| {'No':<3} | {'ID User':<8} | {'ID Buku':<8} | {'Judul Buku':<25} | {'Tanggal':<12} |")
+        print(f"| {'No':<3} | {'Username':<8} | {'ID Buku':<8} | {'Judul Buku':<25} | {'Tanggal':<12} |")
         print("=" * 80)
 
         no = 1
@@ -40,7 +40,7 @@ class LinkedList:
             if len(judul) > 25:
                 judul = judul[:22] + "..."
 
-            print(f"| {no:<3} | {data['id_user']:<8} | {data['id_buku']:<8} | {judul:<25} | {data['tanggal_peminjaman']:<12} |")
+            print(f"| {no:<3} | {data['username']:<8} | {data['id_buku']:<8} | {judul:<25} | {data['tanggal_peminjaman']:<12} |")
 
             current = current.next
             no += 1
@@ -61,12 +61,12 @@ def proses_peminjaman(ll_peminjaman):
     data_buku = baca_data(BUKU_FILE)
     cek_data(data_buku, "buku")
 
-    id_user = input("\nMasukkan ID User: ")
+    username = input("\nMasukkan username pengunjung: ")
 
     # cek member
-    if not cek_member(id_user):
-        print("❌ User bukan member! Harus daftar dulu.")
-        input("Tekan ENTER untuk lanjut...")
+    if not cek_member(username):
+        print("Pengujung bukan member! Harus daftar dulu.")
+        pause()
         return
 
     print("✅ Member ditemukan.")
@@ -86,7 +86,7 @@ def proses_peminjaman(ll_peminjaman):
     if konfirmasi.lower() == 'y':
 
         data_pinjam = {
-            "id_user": id_user,
+            "username": username,
             "id_buku": buku["id_buku"],
             "judul_buku": buku["judul_buku"],
             "tanggal_peminjaman": datetime.now().strftime("%d-%m-%Y")
@@ -97,10 +97,10 @@ def proses_peminjaman(ll_peminjaman):
 
         simpan_data(BUKU_FILE, data_buku)
 
-        print("✅ Buku berhasil dipinjam!")
+        print("Buku berhasil dipinjam!")
         pause()
     else:
-        print("❌ Peminjaman dibatalkan.")
+        print("Peminjaman dibatalkan.")
         pause()
 
 def peminjaman_menu(ll_peminjaman):
@@ -126,10 +126,10 @@ def peminjaman_menu(ll_peminjaman):
             data_list = ll_peminjaman.to_list()
 
             if not data_list:
-                print("\n❌ Belum ada data peminjaman. Tidak bisa disimpan.")
+                print("\nBelum ada data peminjaman. Tidak bisa disimpan.")
             else:
-                simpan_data("peminjaman.json", data_list)
-                print("\n✅ Data peminjaman berhasil disimpan.")
+                simpan_data(PEMINJAMAN_FILE, data_list)
+                print("\nData peminjaman berhasil disimpan.")
             pause()
         elif choice == "0":
             break

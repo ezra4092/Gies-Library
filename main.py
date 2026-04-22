@@ -1,17 +1,8 @@
-"""
-Modules:
-- config.py: Konstanta dan konfigurasi
-- helpers.py: Fungsi utilitas
-- pdf_generator.py: Generate PDF
-- admin.py: Admin CRUD operations
-- user.py: User features (Facial & Body Care)
-- main.py: Entry point aplikasi
 
-"""
 
-from sistem import clear_screen, pause
-from admin import admin_login, admin_menu
-from user import login_pengunjung, user_menu
+from app.sistem import clear_screen, pause
+from app.admin import admin_login, admin_menu
+from app.user import login_pengunjung, user_menu
 
 def main_menu():
     """Main menu aplikasi"""

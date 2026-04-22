@@ -1,6 +1,6 @@
-from sistem import *
+from app.sistem import *
 from config import *
-from peminjaman import peminjaman_menu, LinkedList
+from app.peminjaman import peminjaman_menu, LinkedList
 from datetime import datetime
 
 def admin_login():
@@ -14,11 +14,11 @@ def admin_login():
     password = input("Password: ").strip()
     
     if username == ADMIN_USN and password == ADMIN_PW:
-        print("\n Login berhasil! Selamat datang, Admin!")
+        print("\nLogin berhasil! Selamat datang, Admin!")
         pause()
         return True
     else:
-        print("\n✗ Username atau password salah!")
+        print("\nUsername atau password salah!")
         pause()
         return False
     
