@@ -2,6 +2,7 @@ from app.sistem import *
 from config import *
 from app.peminjaman import peminjaman_menu, LinkedList
 from datetime import datetime
+from app.laporan import cetak_laporan_pdf
 
 def admin_login():
     """Admin login"""
@@ -323,7 +324,7 @@ def admin_menu(ll_peminjaman):
         print("1. Kelola Data Buku")
         print("2. Kelola Data Pengunjung")
         print("3. Kelola Data Peminjaman")
-        # print("4. Cetak Laporan")
+        print("4. Cetak Laporan PDF")
         print("0. Logout")
         
         choice = input("\nPilih (0-2): ").strip()
@@ -334,6 +335,8 @@ def admin_menu(ll_peminjaman):
             crud_menu(USER_FILE, "user")
         elif choice == "3":
             peminjaman_menu(ll_peminjaman)
+        elif choice == "4":
+            cetak_laporan_pdf()
         elif choice == "0":
             print("\nLogging out...")
             pause()
