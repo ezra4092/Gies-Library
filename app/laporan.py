@@ -65,19 +65,21 @@ def laporan_buku_pdf():
     elements.append(Spacer(1, 12))
 
     table_data = [
-        ["ID Buku", "Judul Buku", "Penulis", "Kategori", "Stok"]
+        ["No", "ID Buku", "Judul Buku", "Penulis", "Kategori", "Stok", "Tanggal"]
     ]
 
-    for buku in data:
+    for i, buku in enumerate(data, start=1):
         table_data.append([
+            str(i),
             buku["id_buku"],
             buku["judul_buku"],
             buku["nama_penulis"],
             buku["kategori"],
-            str(buku["stok"])
+            str(buku["stok"]),
+            buku["tanggal"]
         ])
 
-    table = Table(table_data, colWidths=[70, 150, 120, 100, 50])
+    table = Table(table_data, colWidths=[40, 60, 140, 110, 90, 40, 80])
 
     table.setStyle(TableStyle([
         ('BACKGROUND', (0, 0), (-1, 0), colors.darkblue),
@@ -126,18 +128,24 @@ def laporan_user_pdf():
     elements.append(Spacer(1, 12))
 
     table_data = [
-        ["ID User", "Nama", "Username", "Member"]
+        ["No", "ID User", "Nama", "Umur", "No Telp", "Username", "Member"]
     ]
 
-    for user in data:
+    for i, user in enumerate(data, start=1):
         table_data.append([
+            str(i),
             user["id_user"],
             user["nama"],
+            user["umur"],
+            user["no_telp"],
             user["username"],
             user["member"]
         ])
 
-    table = Table(table_data, colWidths=[80, 150, 150, 80])
+    table = Table(
+        table_data,
+        colWidths=[35, 55, 100, 45, 90, 100, 55]
+    )
 
     table.setStyle(TableStyle([
         ('BACKGROUND', (0, 0), (-1, 0), colors.darkgreen),
@@ -186,17 +194,22 @@ def laporan_peminjaman_pdf():
     elements.append(Spacer(1, 12))
 
     table_data = [
-        ["Username", "Judul Buku", "Tanggal Pinjam"]
+        ["No", "Username", "ID Buku", "Judul Buku", "Tanggal Pinjam"]
     ]
 
-    for item in data:
+    for i, item in enumerate(data, start=1):
         table_data.append([
+            str(i),
             item["username"],
+            item["id_buku"],
             item["judul_buku"],
             item["tanggal_peminjaman"]
         ])
 
-    table = Table(table_data, colWidths=[120, 220, 120])
+    table = Table(
+        table_data,
+        colWidths=[35, 60, 90, 180, 100]
+    )
 
     table.setStyle(TableStyle([
         ('BACKGROUND', (0, 0), (-1, 0), colors.darkred),

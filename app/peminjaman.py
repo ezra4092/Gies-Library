@@ -129,7 +129,6 @@ def peminjaman_menu(ll_peminjaman):
                 print("\nBelum ada data peminjaman. Tidak bisa disimpan.")
             else:
                 simpan_peminjaman(ll_peminjaman, PEMINJAMAN_FILE)
-                print("\nData peminjaman berhasil disimpan.")
             pause()
         elif choice == "0":
             break

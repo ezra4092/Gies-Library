@@ -10,5 +10,11 @@
         "id_buku": "BKU06",
         "judul_buku": "Bukan Pasar Malam",
         "tanggal_peminjaman": "19-05-2026"
+    },
+    {
+        "username": "farhan",
+        "id_buku": "BKU18",
+        "judul_buku": "1984",
+        "tanggal_peminjaman": "19-05-2026"
     }
 ]
