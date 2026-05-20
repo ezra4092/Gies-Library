@@ -93,6 +93,8 @@ def lihat_buku():
         pause()
         return
 
+    data_buku.sort(key=lambda buku: buku.get("judul_buku", "").lower())
+
     judul = "📚 DAFTAR BUKU GIE'S LIBRARY 📚"
     print(f"{judul:^{106}}")
     print("=" * 106)
@@ -105,7 +107,7 @@ def lihat_buku():
         stok = buku.get("stok", "-")
         kategori = buku.get("kategori", "-")
 
-        print(f"| {i:<5} | {judul_buku:<30} | {nama_penulis:<25} | {stok:^10} | {kategori:^20} | ")
+        print(f"| {i:<5} | {judul_buku:<30} | {nama_penulis:<25} | {stok:^10} | {kategori:^20} |")
 
     print("=" * 106)
 
