@@ -11,6 +11,7 @@ from reportlab.lib.styles import getSampleStyleSheet
 
 from app.sistem import *
 from config import BUKU_FILE, USER_FILE, PEMINJAMAN_FILE
+from datetime import datetime
 
 
 def cetak_laporan_pdf():
@@ -44,9 +45,10 @@ def cetak_laporan_pdf():
 
 def laporan_buku_pdf():
     data = baca_data(BUKU_FILE)
-    from datetime import datetime
 
-    pdf = SimpleDocTemplate("laporan_buku.pdf")
+    timestamp = datetime.now().strftime("%d-%m-%Y_%H-%M-%S")
+    nama_file = f"laporan_buku_{timestamp}.pdf"
+    pdf = SimpleDocTemplate(nama_file)
 
     elements = []
     styles = getSampleStyleSheet()
@@ -102,14 +104,15 @@ def laporan_buku_pdf():
 
     pdf.build(elements)
 
-    print("\nPDF laporan buku berhasil dibuat!")
+    print(f"\nPDF {nama_file} berhasil dibuat!")
     pause()
 
 def laporan_user_pdf():
     data = baca_data(USER_FILE)
-    from datetime import datetime
 
-    pdf = SimpleDocTemplate("laporan_pengunjung.pdf")
+    timestamp = datetime.now().strftime("%d-%m-%Y_%H-%M-%S")
+    nama_file = f"laporan_pengunjung_{timestamp}.pdf"
+    pdf = SimpleDocTemplate(nama_file)
 
     elements = []
     styles = getSampleStyleSheet()
@@ -168,14 +171,15 @@ def laporan_user_pdf():
 
     pdf.build(elements)
 
-    print("\nPDF laporan pengunjung berhasil dibuat!")
+    print(f"\nPDF {nama_file} berhasil dibuat!")
     pause()
 
 def laporan_peminjaman_pdf():
     data = baca_data(PEMINJAMAN_FILE)
-    from datetime import datetime
 
-    pdf = SimpleDocTemplate("laporan_peminjaman.pdf")
+    timestamp = datetime.now().strftime("%d-%m-%Y_%H-%M-%S")
+    nama_file = f"laporan_peminjaman_{timestamp}.pdf"
+    pdf = SimpleDocTemplate(nama_file)
 
     elements = []
     styles = getSampleStyleSheet()
@@ -195,21 +199,26 @@ def laporan_peminjaman_pdf():
     elements.append(Spacer(1, 12))
 
     table_data = [
-        ["No", "Username", "ID Buku", "Judul Buku", "Tanggal Pinjam"]
+        ["No", "Username", "ID Buku", "Judul Buku", "Tanggal Pinjam", "Tanggal Kembali"]
     ]
 
     for i, item in enumerate(data, start=1):
+        tgl_kembali = item.get("tanggal_pengembalian")
+        if not tgl_kembali: 
+            tgl_kembali = "-"
+
         table_data.append([
             str(i),
             item["username"],
             item["id_buku"],
             item["judul_buku"],
-            item["tanggal_peminjaman"]
+            item["tanggal_peminjaman"],
+            tgl_kembali
         ])
 
     table = Table(
         table_data,
-        colWidths=[35, 60, 90, 180, 100]
+        colWidths=[35, 60, 60, 170, 80, 80]
     )
 
     table.setStyle(TableStyle([
@@ -232,5 +241,5 @@ def laporan_peminjaman_pdf():
 
     pdf.build(elements)
 
-    print("\nPDF laporan peminjaman berhasil dibuat!")
+    print(f"\nPDF {nama_file} berhasil dibuat!")
     pause()
