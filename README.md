@@ -139,7 +139,7 @@ Password: `admin123`
    - Mengelola Data Peminjaman
    - Mencetak Laporan PDF
 
-## 📊 Data Structure
+## Data Structure
 
 Aplikasi menggunakan 3 file JSON utama untuk meniru *Relational Database*.
 
